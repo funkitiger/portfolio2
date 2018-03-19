@@ -50,6 +50,7 @@ public class Authentification {
                 }
             }
 
+            @Override
             public String writeValue(Object value) {
                 try {
                     return jacksonObjectMapper.writeValueAsString(value);
@@ -70,7 +71,6 @@ public class Authentification {
                     .asObject(AuthReponse.class);
             return authReponseHttpResponse.getBody().getAccess_token();
         } catch (UnirestException e) {
-            e.printStackTrace();
         }
         return "";
     }
