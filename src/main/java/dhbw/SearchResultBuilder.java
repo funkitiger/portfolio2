@@ -5,6 +5,7 @@
  */
 package dhbw;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import dhbw.pojo.result.search.SearchResult;
 import dhbw.pojo.result.search.SearchResultList;
 import dhbw.pojo.search.album.SearchAlbum;
@@ -14,7 +15,7 @@ import dhbw.spotify.RequestCategory;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import org.codehaus.jackson.map.ObjectMapper;
+
 
 /**
  *
@@ -27,7 +28,8 @@ public class SearchResultBuilder {
     public static SearchResult buildResult(RequestCategory category, String json, String query) throws IOException {
 
         SearchResult result = new SearchResult();
-        List<SearchResultList> resultListe = new ArrayList<SearchResultList>();
+        List<SearchResultList> resultListe;
+        resultListe = new ArrayList<>();
         result.setResults(null);
         result.setSearchCategory(null);
         result.setSearchTerm(null);
@@ -38,7 +40,7 @@ public class SearchResultBuilder {
             case TRACK:
                 SearchTrack searchTrack = mapper.readValue(json, SearchTrack.class);
                 List<SearchResultList> trackHilfsListe;
-                trackHilfsListe = new ArrayList<SearchResultList>();
+                trackHilfsListe = new ArrayList<>();
 
                 searchTrack.getTracks().getItems().stream().map((track) -> {
                     SearchResultList searchResultList = new SearchResultList();
@@ -56,7 +58,7 @@ public class SearchResultBuilder {
             case ALBUM:
                 SearchAlbum searchAlbum = mapper.readValue(json, SearchAlbum.class);
                 List<SearchResultList> albumHilfsListe;
-                albumHilfsListe = new ArrayList<SearchResultList>();
+                albumHilfsListe = new ArrayList<>();
 
                 searchAlbum.getAlbums().getItems().stream().map((album) -> {
                     SearchResultList searchResultList = new SearchResultList();
@@ -74,7 +76,7 @@ public class SearchResultBuilder {
             case ARTIST:
                 SearchArtist searchArtist = mapper.readValue(json, SearchArtist.class);
                 List<SearchResultList> artistHilfsListe;
-                artistHilfsListe = new ArrayList<SearchResultList>();
+                artistHilfsListe = new ArrayList<>();
                 
 
                 searchArtist.getArtists().getItems().stream().map((artist) -> {

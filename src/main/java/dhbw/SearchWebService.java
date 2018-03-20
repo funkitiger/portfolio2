@@ -15,8 +15,6 @@ import java.io.IOException;
 import java.util.Optional;
 import static dhbw.SearchResultBuilder.buildResult;
 import dhbw.pojo.result.search.SearchResult;
-import dhbw.pojo.result.search.SearchResultList;
-import java.util.List;
 /**
  *
  * @author Nicole

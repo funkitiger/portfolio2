@@ -5,13 +5,14 @@
  */
 package dhbw;
 
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 import dhbw.pojo.detail.album.DetailsAlbum;
 import dhbw.pojo.detail.artist.DetailsArtist;
 import dhbw.pojo.detail.track.DetailsTrack;
 import dhbw.pojo.result.detail.DetailResult;
 import dhbw.spotify.RequestCategory;
 import java.io.IOException;
-import org.codehaus.jackson.map.ObjectMapper;
 
 /**
  *
