@@ -5,9 +5,6 @@
  */
 package dhbw;
 
-import dhbw.pojo.search.album.SearchAlbum;
-import dhbw.pojo.search.artist.SearchArtist;
-import dhbw.pojo.search.track.SearchTrack;
 import dhbw.spotify.RequestCategory;
 import dhbw.spotify.RequestType;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,8 +13,10 @@ import dhbw.spotify.SpotifyRequest;
 import dhbw.spotify.WrongRequestTypeException;
 import java.io.IOException;
 import java.util.Optional;
-import org.codehaus.jackson.map.ObjectMapper;
-
+import static dhbw.SearchResultBuilder.buildResult;
+import dhbw.pojo.result.search.SearchResult;
+import dhbw.pojo.result.search.SearchResultList;
+import java.util.List;
 /**
  *
  * @author Nicole
@@ -25,50 +24,22 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 @RestController
 public class SearchWebService {
-    //@GET
+    
+    SpotifyRequest sprequest = new SpotifyRequest(RequestType.SEARCH);
+    
     @RequestMapping("/search")
-    //@GetMapping("/search")
-    public String search(@RequestParam(value="query")String query, @RequestParam(value="type")RequestCategory type) throws WrongRequestTypeException, IOException {
+    public SearchResult search(@RequestParam("query")String query, @RequestParam("type")RequestCategory category) throws WrongRequestTypeException, IOException {
         
-        SpotifyRequest sprequest = new SpotifyRequest(RequestType.SEARCH);
-               
-        Optional <String> optional = sprequest.performeRequestSearch(type,query);
-        String requestString="";
+        Optional <String> optional = sprequest.performeRequestSearch(category,query);
+        String requestString= null;
         
-        if (optional.isPresent()){//Prüfen, ob der String null ist     
-            requestString = optional.get(); //Auslesen des String im Optional        
+        
+        //Prüfen, ob der String null ist und das Auslesen des Strings im Optional
+        if (optional.isPresent()){     
+            requestString = optional.get();         
         }
         
-        ObjectMapper mapper = new ObjectMapper();
-        
-        SearchTrack searchTrack = null;
-        SearchAlbum searchAlbum = null;
-        SearchArtist searchArtist = null;
-        
-        
-        ObjectMapper mapper2 = new ObjectMapper();
-        String json="";
-        
-        
-        switch(type){
-            case TRACK:
-                searchTrack = mapper.readValue(requestString, SearchTrack.class);
-                json = mapper2.writeValueAsString(searchTrack);
-                break;
-            case ALBUM:
-                searchAlbum = mapper.readValue(requestString, SearchAlbum.class);
-                json = mapper2.writeValueAsString(searchAlbum);
-                break;
-            case ARTIST:
-                searchArtist = mapper.readValue(requestString, SearchArtist.class);
-                json = mapper2.writeValueAsString(searchArtist);
-                break;
-            default:
-                break;
-        }
-        
-       
-       return json;
+        return buildResult(category, requestString, query);
     
     }
 }
