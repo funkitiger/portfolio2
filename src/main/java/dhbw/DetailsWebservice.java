@@ -27,7 +27,7 @@ public class DetailsWebservice {
     SpotifyRequest sprequest = new SpotifyRequest(RequestType.DETAIL);
     
     @RequestMapping("/detail/{id}")
-    public String search(@PathVariable String id,@RequestParam("type")RequestCategory category) throws WrongRequestTypeException, IOException{
+    public String detailSearch(@PathVariable String id,@RequestParam("type")RequestCategory category) throws WrongRequestTypeException, IOException{
         
         Optional <String> optional = sprequest.performeRequestDetail(category, id);
         String requestString = null;
