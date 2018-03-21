@@ -6,6 +6,7 @@
 package dhbw;
 
 import static dhbw.DetailResultBuilder.buildResult;
+import dhbw.pojo.result.detail.DetailResult;
 import dhbw.spotify.RequestCategory;
 import dhbw.spotify.RequestType;
 import dhbw.spotify.SpotifyRequest;
@@ -27,7 +28,7 @@ public class DetailsWebservice {
     SpotifyRequest sprequest = new SpotifyRequest(RequestType.DETAIL);
     
     @RequestMapping("/detail/{id}")
-    public String detailSearch(@PathVariable String id,@RequestParam("type")RequestCategory category) throws WrongRequestTypeException, IOException{
+    public DetailResult detailSearch(@PathVariable("id") String id, @RequestParam("type")RequestCategory category) throws WrongRequestTypeException, IOException{
         
         Optional <String> optional = sprequest.performeRequestDetail(category, id);
         String requestString = null;

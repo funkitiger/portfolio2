@@ -31,7 +31,6 @@ public class SearchWebService {
         Optional <String> optional = sprequest.performeRequestSearch(category,query);
         String requestString= null;
         
-        
         //Prüfen, ob der String null ist und das Auslesen des Strings im Optional
         if (optional.isPresent()){     
             requestString = optional.get();         

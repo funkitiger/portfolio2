@@ -22,7 +22,7 @@ public class DetailResultBuilder {
 
     static ObjectMapper mapper = new ObjectMapper();
 
-    public static String buildResult(RequestCategory category, String id, String json) throws IOException {
+    public static DetailResult buildResult(RequestCategory category, String id, String json) throws IOException {
 
         DetailResult result = new DetailResult();
 
@@ -55,7 +55,7 @@ public class DetailResultBuilder {
                 break;
         }
 
-        return mapper.writeValueAsString(result);
+        return result;
 
     }
 
