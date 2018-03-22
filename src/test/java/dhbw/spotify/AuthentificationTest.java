@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class AuthentificationTest {
 
-    @Test
+    //@Test
     public void testAuthCreation(){
         Authentification authentification = Authentification.getInstance();
         System.out.println("Api Token: " + authentification.getAuthKey());

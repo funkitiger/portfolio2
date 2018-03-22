@@ -48,9 +48,10 @@ public class DetailResultBuilder {
             case ARTIST:
                 DetailsArtist detailsArtist = mapper.readValue(json, DetailsArtist.class);
                 DetailResult artistDetailResult = new DetailResult();
-
+                
                 artistDetailResult.setInfo(detailsArtist.getType());
                 artistDetailResult.setTitle(detailsArtist.getName());
+                artistDetailResult.setPopularity(detailsArtist.getPopularity());
                 result = artistDetailResult;
                 break;
         }

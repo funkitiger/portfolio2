@@ -24,7 +24,9 @@ $(document).ready(() => {
 
                 $.getJSON(urlDetailsThis, (responseDetail) => {
                     //alert(responseDetail.title + ':\n' + responseDetail.info);
-                    alertify.alert('Mehr Informationen', responseDetail.title + ':\n' + responseDetail.info);
+                    
+                    alertify.alert('Mehr Informationen', responseDetail.title 
+                            + ':\n' + responseDetail.info + "<br />" + "Popularität (0-100): " + responseDetail.popularity);
                 })
             });
 

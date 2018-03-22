@@ -52,6 +52,7 @@ public class SearchResultBuilder {
                 }).forEachOrdered((searchResultList) -> {
                     trackHilfsListe.add(searchResultList);
                 });
+
                 resultListe = trackHilfsListe;
                 break;
                 
@@ -73,6 +74,7 @@ public class SearchResultBuilder {
 
                 resultListe = albumHilfsListe;
                 break;
+
             case ARTIST:
                 SearchArtist searchArtist = mapper.readValue(json, SearchArtist.class);
                 List<SearchResultList> artistHilfsListe;
@@ -85,6 +87,7 @@ public class SearchResultBuilder {
                     searchResultList.setId(artist.getId());
                     searchResultList.setPlayLink(artist.getUri());
                     searchResultList.setTitle(artist.getName());
+                    searchResultList.setPopularity(artist.getPopularity());
                     return searchResultList;
                 }).forEachOrdered((searchResultList) -> {
                     artistHilfsListe.add(searchResultList);
@@ -92,6 +95,7 @@ public class SearchResultBuilder {
 
                 resultListe = artistHilfsListe;
                 break;
+
             default:
                 break;
 
