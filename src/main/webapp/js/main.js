@@ -23,7 +23,8 @@ $(document).ready(() => {
                 console.log('url:' + urlDetailsThis);
 
                 $.getJSON(urlDetailsThis, (responseDetail) => {
-                    alert(responseDetail.title + ':\n' + responseDetail.info);
+                    //alert(responseDetail.title + ':\n' + responseDetail.info);
+                    alertify.alert('Mehr Informationen', responseDetail.title + ':\n' + responseDetail.info);
                 })
             });
 
